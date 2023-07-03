@@ -9,6 +9,7 @@ import {
   deleteAll,
   deleteOne,
   deleteCompleted,
+  changeCompletion,
 } from "./controllers/task-controller.js";
 
 dotenv.config();
@@ -30,5 +31,7 @@ app.get("/api/tasks", getTasks);
 app.delete("/deleteAll", deleteAll);
 app.delete("/tasks/:id", deleteOne);
 app.delete("/deleteCompleted", deleteCompleted);
+
+app.put("/changeCompletion/:id", changeCompletion);
 
 app.listen(3000);

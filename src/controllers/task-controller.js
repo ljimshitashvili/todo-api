@@ -57,3 +57,24 @@ export const deleteCompleted = async (req, res) => {
     res.status(500).json({ message: "Error deleting completed tasks." });
   }
 };
+
+export const changeCompletion = async (req, res) => {
+  const taskId = req.params.id;
+
+  try {
+    const task = await Task.findById(taskId);
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found." });
+    }
+
+    task.completed = !task.completed;
+
+    await task.save();
+
+    res.status(200).json({ message: "Task updated successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
